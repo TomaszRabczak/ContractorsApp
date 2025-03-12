@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace Contractors.DatabaseCore
 {
-    public class ContractorsContext : DbContext
+    public class ContractorsDbContext : DbContext
     {
         public DbSet<Contractor> Contractors { get; set; } = default!;
         public DbSet<ContractorAddress> ContractorAddresses { get; set; } = default!;

@@ -1,3 +1,6 @@
+using Contractors.BusinessLayer.Services;
+using Contractors.Contracts.Interfaces;
+using Contractors.DataAccessLayer.Repositories;
 using Contractors.DatabaseCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -19,16 +22,20 @@ namespace Contractors.Forms
             ConfigureServices(services);
             var servicesProvider = services.BuildServiceProvider();
 
-            var dbContext = new ContractorsContext();
+            var dbContext = new ContractorsDbContext();
             dbContext.Database.EnsureCreated();
 
-            Application.Run(servicesProvider.GetRequiredService<MainForm>());
+            Application.Run(servicesProvider.GetRequiredService<GridContractorForm>());
         }
 
         private static void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ContractorsContext>();
-            services.AddSingleton<MainForm>();
+            services.AddDbContext<ContractorsDbContext>();
+
+            services.AddSingleton<GridContractorForm>();
+
+            services.AddScoped<IContractorRepository, ContractorRepository>();
+            services.AddScoped<IContractorService, ContractorService>();
         }
     }
 }
