@@ -42,6 +42,15 @@ namespace Contractors.Forms
                 return;
             }
 
+            var contractor = PrepareContractorToSave();
+            await _contractorService.SaveContractorAsync(contractor);
+
+            Close();
+            await _gridContractorForm.SetDataGrid();
+        }
+
+        private ContractorViewModel PrepareContractorToSave()
+        {
             int contractorId = _contractorViewModel != null ? _contractorViewModel.Id : 0;
             int addressId = _contractorViewModel != null ? _contractorViewModel.Addresses.First().Id : 0;
 
@@ -51,53 +60,31 @@ namespace Contractors.Forms
                     textBoxStreetAndNumber.Text)
             };
 
-            var contractor = ContractorViewModel.Create(contractorId, textBoxName.Text, textBoxNip.Text, textBoxRegon.Text, addresses);
-
-            await _contractorService.SaveContractorAsync(contractor);
-
-            Close();
-            await _gridContractorForm.SetDataGrid();
+            return ContractorViewModel.Create(contractorId, textBoxName.Text, textBoxNip.Text, textBoxRegon.Text, addresses);
         }
 
-        private void buttonClose_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
+        private void buttonClose_Click(object sender, EventArgs e) => Close();
 
-        private void textBoxName_Validating(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            ValidateTextBox(textBoxName, 100);
-        }
+        private void textBoxName_Validating(object sender, System.ComponentModel.CancelEventArgs e) 
+            => ValidateTextBox(textBoxName, 100);
 
         private void textBoxRegon_Validating(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            ValidateTextBox(textBoxRegon, 15);
-        }
+            => ValidateTextBox(textBoxRegon, 15);
 
         private void textBoxNip_Validating(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            ValidateTextBox(textBoxNip, 15);
-        }
+            => ValidateTextBox(textBoxNip, 15);
 
         private void textBoxCountry_Validated(object sender, EventArgs e)
-        {
-            ValidateTextBox(textBoxCountry, 50);
-        }
+            => ValidateTextBox(textBoxCountry, 50);
 
         private void textBoxCity_Validating(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            ValidateTextBox(textBoxCity, 50);
-        }
+            => ValidateTextBox(textBoxCity, 50);
 
         private void textBoxStreetAndNumber_Validating(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            ValidateTextBox(textBoxStreetAndNumber, 50);
-        }
+            => ValidateTextBox(textBoxStreetAndNumber, 50);
 
         private void textBoxPostalCode_Validating(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            ValidateTextBox(textBoxPostalCode, 50);
-        }
+            => ValidateTextBox(textBoxPostalCode, 50);
 
         private bool ValidateTextBox(TextBox textBox, int maxLenght)
         {
@@ -116,6 +103,7 @@ namespace Contractors.Forms
             {
                 errorProvider1.SetError(textBox, "");
             }
+
             return isValid;
         }
 

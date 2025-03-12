@@ -27,13 +27,8 @@ namespace Contractors.DataAccessLayer.Repositories
                 .Take(request.Pagination.PerPage)
                 .ToListAsync();
 
-            return new ItemsResponse<Contractor>(items, _dbContext.Contractors.Count(), request.Pagination);
+            return new ItemsResponse<Contractor>(items, filteredItems.Count(), request.Pagination);
         }
-        //public async Task CreateContractorAsync(Contractor contractor)
-        //{
-        //    await _dbContext.Contractors.AddAsync(contractor);
-        //    await _dbContext.SaveChangesAsync();
-        //}
 
         public async Task SaveContractorAsync(Contractor contractor)
         {
@@ -55,7 +50,8 @@ namespace Contractors.DataAccessLayer.Repositories
 
         public async Task DeleteContractors(IEnumerable<Contractor> contractors)
         {
-            _dbContext.Contractors.RemoveRange(contractors);
+            var ids = contractors.Select(x => x.Id).ToList();
+            await _dbContext.Contractors.Where(x => ids.Contains(x.Id)).ExecuteDeleteAsync();
             await _dbContext.SaveChangesAsync();
         }
     }

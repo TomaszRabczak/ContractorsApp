@@ -28,10 +28,7 @@ namespace Contractors.Forms
             SetButtonsActive();
         }
 
-        private void contractorGridView_SelectionChanged(object sender, EventArgs e)
-        {
-            SetButtonsActive();
-        }
+        private void contractorGridView_SelectionChanged(object sender, EventArgs e) => SetButtonsActive();
 
         private void SetButtonsActive()
         {
@@ -80,9 +77,7 @@ namespace Contractors.Forms
         }
 
         private int GetItemsPerPage()
-        {
-            return comboBoxPageSize.SelectedValue != null ? (int)comboBoxPageSize.SelectedValue : _defaultPageSize;
-        }
+            => comboBoxPageSize.SelectedValue != null ? (int)comboBoxPageSize.SelectedValue : _defaultPageSize;
 
         private async Task FillGridWithData()
         {

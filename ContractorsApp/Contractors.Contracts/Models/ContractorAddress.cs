@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Contractors.Contracts.Models.ViewModel;
 
 namespace Contractors.Contracts.Models
 {
@@ -27,8 +26,6 @@ namespace Contractors.Contracts.Models
         }
 
         public static ContractorAddress Create(int id, string country, string city, string postalCode, string streetAndNumber)
-        {
-            return new ContractorAddress(id, country, city, postalCode, streetAndNumber);
-        }
+            => new ContractorAddress(id, country, city, postalCode, streetAndNumber);
     }
 }

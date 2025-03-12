@@ -41,9 +41,7 @@ namespace Contractors.DatabaseCore
         }
 
         protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
-        {
-            configurationBuilder.Conventions.Remove(typeof(TableNameFromDbSetConvention));
-        }
+            => configurationBuilder.Conventions.Remove(typeof(TableNameFromDbSetConvention));
 
         public async override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
