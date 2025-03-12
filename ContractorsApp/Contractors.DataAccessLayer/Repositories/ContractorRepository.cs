@@ -17,8 +17,10 @@ namespace Contractors.DataAccessLayer.Repositories
 
         public async Task<ItemsResponse<Contractor>> GetContractorsAsync(GetContractorsRequest request)
         {
-            var items = await _dbContext.Contractors
-                .Include(x => x.Addresses)
+            var query = _dbContext.Contractors.Include(x => x.Addresses);
+            var filteredItems = request.Filters.ApplyFilters(query);
+
+            var items = await filteredItems
                 .OrderByDescending(x => x.Id)
                 .Skip((request.Pagination.Page - 1) * request.Pagination.PerPage)
                 .Take(request.Pagination.PerPage)

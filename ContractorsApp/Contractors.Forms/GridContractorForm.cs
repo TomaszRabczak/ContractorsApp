@@ -83,6 +83,11 @@ namespace Contractors.Forms
                 {
                     Page = _currentPage,
                     PerPage = GetItemsPerPage()
+                },
+                Filters = new Contracts.Models.Filters.GetContractorsFilters
+                {
+                    Name = textBoxName.Text,
+                    Nip = textBoxNip.Text,
                 }
             };
             var contractors = await _contractorService.GetContractorsAsync(request);
@@ -104,6 +109,13 @@ namespace Contractors.Forms
             contractorGridView.Columns["Id"].Visible = false;
             contractorGridView.Columns["Addresses"].Visible = false;
             contractorGridView.Columns["DisplayedAddress"].HeaderText = "Address";
+        }
+
+        private async void btnSearch_Click(object sender, EventArgs e)
+        {
+            _currentPage = 1;
+            await FillGridWithData();
+            SetPaginationInfo();
         }
     }
 }

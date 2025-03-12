@@ -44,6 +44,9 @@ namespace Contractors.Forms
             btnPrev = new Button();
             btnNext = new Button();
             lblPageDescription = new Label();
+            textBoxName = new TextBox();
+            textBoxNip = new TextBox();
+            btnSearch = new Button();
             ((System.ComponentModel.ISupportInitialize)contractorGridView).BeginInit();
             SuspendLayout();
             // 
@@ -53,12 +56,12 @@ namespace Contractors.Forms
             contractorGridView.AllowUserToDeleteRows = false;
             contractorGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             contractorGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            contractorGridView.Location = new Point(28, 81);
+            contractorGridView.Location = new Point(28, 130);
             contractorGridView.MultiSelect = false;
             contractorGridView.Name = "contractorGridView";
             contractorGridView.ReadOnly = true;
             contractorGridView.RowHeadersWidth = 51;
-            contractorGridView.Size = new Size(994, 383);
+            contractorGridView.Size = new Size(994, 368);
             contractorGridView.TabIndex = 0;
             contractorGridView.SelectionChanged += contractorGridView_SelectionChanged;
             // 
@@ -70,7 +73,7 @@ namespace Contractors.Forms
             // 
             // btnDelete
             // 
-            btnDelete.Location = new Point(903, 25);
+            btnDelete.Location = new Point(903, 71);
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new Size(119, 40);
             btnDelete.TabIndex = 1;
@@ -80,7 +83,7 @@ namespace Contractors.Forms
             // 
             // btnEdit
             // 
-            btnEdit.Location = new Point(767, 25);
+            btnEdit.Location = new Point(766, 71);
             btnEdit.Name = "btnEdit";
             btnEdit.Size = new Size(119, 40);
             btnEdit.TabIndex = 2;
@@ -89,7 +92,7 @@ namespace Contractors.Forms
             // 
             // btnAdd
             // 
-            btnAdd.Location = new Point(629, 25);
+            btnAdd.Location = new Point(629, 71);
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new Size(119, 40);
             btnAdd.TabIndex = 3;
@@ -99,7 +102,7 @@ namespace Contractors.Forms
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(28, 492);
+            label1.Location = new Point(28, 526);
             label1.Name = "label1";
             label1.Size = new Size(73, 20);
             label1.TabIndex = 4;
@@ -108,7 +111,7 @@ namespace Contractors.Forms
             // comboBoxPageSize
             // 
             comboBoxPageSize.FormattingEnabled = true;
-            comboBoxPageSize.Location = new Point(107, 489);
+            comboBoxPageSize.Location = new Point(107, 523);
             comboBoxPageSize.Name = "comboBoxPageSize";
             comboBoxPageSize.Size = new Size(46, 28);
             comboBoxPageSize.TabIndex = 5;
@@ -116,7 +119,7 @@ namespace Contractors.Forms
             // 
             // btnPrev
             // 
-            btnPrev.Location = new Point(170, 489);
+            btnPrev.Location = new Point(168, 522);
             btnPrev.Name = "btnPrev";
             btnPrev.Size = new Size(31, 29);
             btnPrev.TabIndex = 6;
@@ -126,7 +129,7 @@ namespace Contractors.Forms
             // 
             // btnNext
             // 
-            btnNext.Location = new Point(315, 489);
+            btnNext.Location = new Point(316, 522);
             btnNext.Name = "btnNext";
             btnNext.Size = new Size(31, 29);
             btnNext.TabIndex = 7;
@@ -138,18 +141,47 @@ namespace Contractors.Forms
             // 
             lblPageDescription.AutoSize = true;
             lblPageDescription.BorderStyle = BorderStyle.Fixed3D;
-            lblPageDescription.Location = new Point(216, 493);
+            lblPageDescription.Location = new Point(216, 526);
             lblPageDescription.Name = "lblPageDescription";
             lblPageDescription.Padding = new Padding(25, 0, 25, 0);
             lblPageDescription.Size = new Size(83, 22);
             lblPageDescription.TabIndex = 8;
             lblPageDescription.Text = "0/0";
             // 
+            // textBoxName
+            // 
+            textBoxName.Location = new Point(28, 32);
+            textBoxName.Name = "textBoxName";
+            textBoxName.PlaceholderText = "Name";
+            textBoxName.Size = new Size(203, 27);
+            textBoxName.TabIndex = 9;
+            // 
+            // textBoxNip
+            // 
+            textBoxNip.Location = new Point(28, 84);
+            textBoxNip.Name = "textBoxNip";
+            textBoxNip.PlaceholderText = "NIP";
+            textBoxNip.Size = new Size(203, 27);
+            textBoxNip.TabIndex = 10;
+            // 
+            // btnSearch
+            // 
+            btnSearch.Location = new Point(261, 52);
+            btnSearch.Name = "btnSearch";
+            btnSearch.Size = new Size(119, 40);
+            btnSearch.TabIndex = 11;
+            btnSearch.Text = "Search";
+            btnSearch.UseVisualStyleBackColor = true;
+            btnSearch.Click += btnSearch_Click;
+            // 
             // GridContractorForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1057, 536);
+            ClientSize = new Size(1057, 572);
+            Controls.Add(btnSearch);
+            Controls.Add(textBoxNip);
+            Controls.Add(textBoxName);
             Controls.Add(lblPageDescription);
             Controls.Add(btnNext);
             Controls.Add(btnPrev);
@@ -180,5 +212,8 @@ namespace Contractors.Forms
         private Button btnPrev;
         private Button btnNext;
         private Label lblPageDescription;
+        private TextBox textBoxName;
+        private TextBox textBoxNip;
+        private Button btnSearch;
     }
 }
