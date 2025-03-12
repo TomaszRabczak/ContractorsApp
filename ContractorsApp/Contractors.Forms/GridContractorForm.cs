@@ -25,9 +25,15 @@ namespace Contractors.Forms
             InitPageSizeComboBox();
             await SetDataGrid();
             SetGridColumnInfo();
+            SetButtonsActive();
         }
 
         private void contractorGridView_SelectionChanged(object sender, EventArgs e)
+        {
+            SetButtonsActive();
+        }
+
+        private void SetButtonsActive()
         {
             btnDelete.Enabled = contractorGridView.SelectedRows.Count >= 1;
             btnEdit.Enabled = contractorGridView.SelectedRows.Count == 1;

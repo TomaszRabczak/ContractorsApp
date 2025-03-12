@@ -1,11 +1,21 @@
-﻿namespace Contractors.Contracts.Models.ViewModel
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Contractors.Contracts.Models.ViewModel
 {
     public class ContractorAddressViewModel
     {
         public int Id { get; set; }
+        [Required]
+        [MaxLength(50)]
         public string Country { get; set; }
+        [Required]
+        [MaxLength(50)]
         public string City { get; set; }
+        [Required]
+        [MaxLength(10)]
         public string PostalCode { get; set; }
+        [Required]
+        [MaxLength(100)]
         public string StreetAndNumber { get; set; }
 
         public ContractorAddressViewModel(int id, string country, string city, string postalCode, string streetAndNumber)

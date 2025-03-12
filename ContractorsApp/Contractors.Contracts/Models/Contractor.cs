@@ -8,9 +8,9 @@ namespace Contractors.Contracts.Models
     {
         [MaxLength(100)]
         public string Name { get; set; } = default!;
-        [StringLength(10)]
+        [MaxLength(15)]
         public string Nip { get; set; } = default!;
-        [StringLength(9)]
+        [MaxLength(15)]
         public string Regon { get; set; } = default!;
         public ICollection<ContractorAddress> Addresses { get; set; } = new List<ContractorAddress>();
 

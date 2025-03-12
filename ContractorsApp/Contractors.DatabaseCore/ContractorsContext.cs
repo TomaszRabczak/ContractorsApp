@@ -15,15 +15,11 @@ namespace Contractors.DatabaseCore
             modelBuilder
                 .Entity<Contractor>()
                 .Property(e => e.Nip)
-                .HasMaxLength(10)
-                .IsFixedLength()
                 .IsUnicode(false);
 
             modelBuilder
                 .Entity<Contractor>()
                 .Property(e => e.Regon)
-                .HasMaxLength(9)
-                .IsFixedLength()
                 .IsUnicode(false);
 
             modelBuilder

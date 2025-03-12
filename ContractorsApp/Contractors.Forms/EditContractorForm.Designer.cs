@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             textBoxName = new TextBox();
             textBoxNip = new TextBox();
             textBoxRegon = new TextBox();
@@ -37,6 +38,8 @@
             buttonClose = new Button();
             btnSave = new Button();
             textBoxCountry = new TextBox();
+            errorProvider1 = new ErrorProvider(components);
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
             // 
             // textBoxName
@@ -44,48 +47,54 @@
             textBoxName.Location = new Point(12, 23);
             textBoxName.Name = "textBoxName";
             textBoxName.PlaceholderText = "Name";
-            textBoxName.Size = new Size(213, 27);
+            textBoxName.Size = new Size(193, 27);
             textBoxName.TabIndex = 0;
+            textBoxName.Validating += textBoxName_Validating;
             // 
             // textBoxNip
             // 
             textBoxNip.Location = new Point(294, 23);
             textBoxNip.Name = "textBoxNip";
             textBoxNip.PlaceholderText = "NIP";
-            textBoxNip.Size = new Size(213, 27);
+            textBoxNip.Size = new Size(193, 27);
             textBoxNip.TabIndex = 1;
+            textBoxNip.Validating += textBoxNip_Validating;
             // 
             // textBoxRegon
             // 
             textBoxRegon.Location = new Point(575, 23);
             textBoxRegon.Name = "textBoxRegon";
             textBoxRegon.PlaceholderText = "REGON";
-            textBoxRegon.Size = new Size(213, 27);
+            textBoxRegon.Size = new Size(193, 27);
             textBoxRegon.TabIndex = 2;
+            textBoxRegon.Validating += textBoxRegon_Validating;
             // 
             // textBoxCity
             // 
             textBoxCity.Location = new Point(294, 80);
             textBoxCity.Name = "textBoxCity";
             textBoxCity.PlaceholderText = "City";
-            textBoxCity.Size = new Size(213, 27);
+            textBoxCity.Size = new Size(193, 27);
             textBoxCity.TabIndex = 4;
+            textBoxCity.Validating += textBoxCity_Validating;
             // 
             // textBoxStreetAndNumber
             // 
             textBoxStreetAndNumber.Location = new Point(575, 80);
             textBoxStreetAndNumber.Name = "textBoxStreetAndNumber";
             textBoxStreetAndNumber.PlaceholderText = "Street and number";
-            textBoxStreetAndNumber.Size = new Size(213, 27);
+            textBoxStreetAndNumber.Size = new Size(193, 27);
             textBoxStreetAndNumber.TabIndex = 5;
+            textBoxStreetAndNumber.Validating += textBoxStreetAndNumber_Validating;
             // 
             // textBoxPostalCode
             // 
             textBoxPostalCode.Location = new Point(12, 140);
             textBoxPostalCode.Name = "textBoxPostalCode";
             textBoxPostalCode.PlaceholderText = "Postal code";
-            textBoxPostalCode.Size = new Size(213, 27);
+            textBoxPostalCode.Size = new Size(193, 27);
             textBoxPostalCode.TabIndex = 6;
+            textBoxPostalCode.Validating += textBoxPostalCode_Validating;
             // 
             // buttonClose
             // 
@@ -112,8 +121,13 @@
             textBoxCountry.Location = new Point(12, 80);
             textBoxCountry.Name = "textBoxCountry";
             textBoxCountry.PlaceholderText = "Country";
-            textBoxCountry.Size = new Size(213, 27);
+            textBoxCountry.Size = new Size(193, 27);
             textBoxCountry.TabIndex = 9;
+            textBoxCountry.Validated += textBoxCountry_Validated;
+            // 
+            // errorProvider1
+            // 
+            errorProvider1.ContainerControl = this;
             // 
             // EditContractorForm
             // 
@@ -132,6 +146,7 @@
             Name = "EditContractorForm";
             StartPosition = FormStartPosition.CenterParent;
             Text = "EditContractorForm";
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -148,5 +163,6 @@
         private ComboBox comboBoxCountry;
         private Button buttonClose;
         private Button btnSave;
+        private ErrorProvider errorProvider1;
     }
 }
