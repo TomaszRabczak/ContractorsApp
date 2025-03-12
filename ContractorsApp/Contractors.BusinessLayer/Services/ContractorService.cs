@@ -1,4 +1,5 @@
 ﻿using Contractors.Contracts.Interfaces;
+using Contractors.Contracts.Models;
 using Contractors.Contracts.Models.Requests;
 using Contractors.Contracts.Models.Utils;
 using Contractors.Contracts.Models.ViewModel;
@@ -20,7 +21,14 @@ namespace Contractors.BusinessLayer.Services
             var mappedContractors = contractors.Items
                 .Select(x => ContractorViewModel.Create(x.Id, x.Name, x.Nip, x.Regon, x.Addresses)).ToList();
 
-            return new ItemsResponse<ContractorViewModel>(mappedContractors, contractors.Pagination.Total, request.Pagination);
+            return new ItemsResponse<ContractorViewModel>(mappedContractors, contractors.Pagination.Total, 
+                request.Pagination);
+        }
+
+        public async Task DeleteContractors(IEnumerable<ContractorViewModel> contractors)
+        {
+            var mappedContractors = contractors.Select(x => new Contractor { Id = x.Id });
+            await _contractorRepository.DeleteContractors(mappedContractors);
         }
     }
 }

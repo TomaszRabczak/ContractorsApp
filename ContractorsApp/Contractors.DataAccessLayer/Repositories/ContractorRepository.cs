@@ -21,12 +21,19 @@ namespace Contractors.DataAccessLayer.Repositories
             var filteredItems = request.Filters.ApplyFilters(query);
 
             var items = await filteredItems
+                .AsNoTracking()
                 .OrderByDescending(x => x.Id)
                 .Skip((request.Pagination.Page - 1) * request.Pagination.PerPage)
                 .Take(request.Pagination.PerPage)
                 .ToListAsync();
 
             return new ItemsResponse<Contractor>(items, _dbContext.Contractors.Count(), request.Pagination);
+        }
+
+        public async Task DeleteContractors(IEnumerable<Contractor> contractors)
+        {
+            _dbContext.Contractors.RemoveRange(contractors);
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

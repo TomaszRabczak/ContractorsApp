@@ -23,45 +23,48 @@ namespace Contractors.Forms
         private async void MainForm_Load_2(object sender, EventArgs e)
         {
             InitPageSizeComboBox();
-            await FillGridWithData();
-            SetPaginationInfo();
+            await SetDataGrid();
             SetGridColumnInfo();
         }
 
         private void contractorGridView_SelectionChanged(object sender, EventArgs e)
         {
-            btnDelete.Enabled = contractorGridView.SelectedRows.Count == 1;
+            btnDelete.Enabled = contractorGridView.SelectedRows.Count >= 1;
             btnEdit.Enabled = contractorGridView.SelectedRows.Count == 1;
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        private async void btnDelete_Click(object sender, EventArgs e)
         {
-            var contractorToDelete = contractorGridView.SelectedRows[0].DataBoundItem as ContractorViewModel;
-            if (contractorToDelete != null)
+            var contractorsToDelete = new List<ContractorViewModel>();
+            foreach(var row in contractorGridView.SelectedRows)
             {
-
+                if (row is DataGridViewRow gridViewRow && gridViewRow.DataBoundItem is ContractorViewModel contractorRow)
+                {
+                    contractorsToDelete.Add(contractorRow);
+                }
             }
+            await _contractorService.DeleteContractors(contractorsToDelete);
+
+            _currentPage = 1;
+            await SetDataGrid();
         }
 
         private async void comboBoxPageSize_SelectionChangeCommitted(object sender, EventArgs e)
         {
             _currentPage = 1;
-            await FillGridWithData();
-            SetPaginationInfo();
+            await SetDataGrid();
         }
 
         private async void btnNext_Click(object sender, EventArgs e)
         {
             _currentPage++;
-            await FillGridWithData();
-            SetPaginationInfo();
+            await SetDataGrid();
         }
 
         private async void btnPrev_Click(object sender, EventArgs e)
         {
             _currentPage--;
-            await FillGridWithData();
-            SetPaginationInfo();
+            await SetDataGrid();
         }
 
         private void InitPageSizeComboBox()
@@ -109,6 +112,12 @@ namespace Contractors.Forms
             contractorGridView.Columns["Id"].Visible = false;
             contractorGridView.Columns["Addresses"].Visible = false;
             contractorGridView.Columns["DisplayedAddress"].HeaderText = "Address";
+        }
+
+        private async Task SetDataGrid()
+        {
+            await FillGridWithData();
+            SetPaginationInfo();
         }
 
         private async void btnSearch_Click(object sender, EventArgs e)

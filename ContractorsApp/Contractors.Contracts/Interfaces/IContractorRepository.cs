@@ -7,5 +7,6 @@ namespace Contractors.Contracts.Interfaces
     public interface IContractorRepository
     {
         Task<ItemsResponse<Contractor>> GetContractorsAsync(GetContractorsRequest request);
+        Task DeleteContractors(IEnumerable<Contractor> contractors);
     }
 }

@@ -57,7 +57,6 @@ namespace Contractors.Forms
             contractorGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             contractorGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             contractorGridView.Location = new Point(28, 130);
-            contractorGridView.MultiSelect = false;
             contractorGridView.Name = "contractorGridView";
             contractorGridView.ReadOnly = true;
             contractorGridView.RowHeadersWidth = 51;
