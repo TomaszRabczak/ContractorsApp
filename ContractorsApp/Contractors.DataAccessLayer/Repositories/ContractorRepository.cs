@@ -29,6 +29,29 @@ namespace Contractors.DataAccessLayer.Repositories
 
             return new ItemsResponse<Contractor>(items, _dbContext.Contractors.Count(), request.Pagination);
         }
+        //public async Task CreateContractorAsync(Contractor contractor)
+        //{
+        //    await _dbContext.Contractors.AddAsync(contractor);
+        //    await _dbContext.SaveChangesAsync();
+        //}
+
+        public async Task SaveContractorAsync(Contractor contractor)
+        {
+            var updatedContractor = await _dbContext.Contractors.FirstOrDefaultAsync(x => x.Id == contractor.Id);
+            if(updatedContractor != null)
+            {
+                updatedContractor.Name = contractor.Name;
+                updatedContractor.Nip = contractor.Nip;
+                updatedContractor.Regon = contractor.Regon;
+                updatedContractor.Addresses = contractor.Addresses;
+            }
+            else
+            {
+                await _dbContext.Contractors.AddAsync(contractor);
+            }
+            
+            await _dbContext.SaveChangesAsync();
+        }
 
         public async Task DeleteContractors(IEnumerable<Contractor> contractors)
         {

@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Contractors.Contracts.Models.ViewModel;
+using System.Diagnostics.Metrics;
 
 namespace Contractors.Contracts.Models
 {
@@ -11,5 +13,23 @@ namespace Contractors.Contracts.Models
         [StringLength(9)]
         public string Regon { get; set; } = default!;
         public ICollection<ContractorAddress> Addresses { get; set; } = new List<ContractorAddress>();
+
+        public Contractor()
+        {
+                
+        }
+        public Contractor(int id, string name, string nip, string regon, ICollection<ContractorAddress> addresses)
+        {
+            Id = id;
+            Name = name;
+            Nip = nip;
+            Regon = regon;
+            Addresses = addresses;
+        }
+
+        public static Contractor Create(int id, string name, string nip, string regon, ICollection<ContractorAddress> addresses)
+        {
+            return new Contractor(id, name, nip, regon, addresses);
+        }
     }
 }

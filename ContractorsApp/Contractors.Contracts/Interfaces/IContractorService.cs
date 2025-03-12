@@ -8,6 +8,8 @@ namespace Contractors.Contracts.Interfaces
     public interface IContractorService
     {
         Task<ItemsResponse<ContractorViewModel>> GetContractorsAsync(GetContractorsRequest request);
+        //Task CreateContractorAsync(ContractorViewModel contractor);
+        Task SaveContractorAsync(ContractorViewModel contractor);
         Task DeleteContractors(IEnumerable<ContractorViewModel> contractors);
     }
 }

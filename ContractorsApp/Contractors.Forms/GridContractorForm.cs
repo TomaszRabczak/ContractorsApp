@@ -36,7 +36,7 @@ namespace Contractors.Forms
         private async void btnDelete_Click(object sender, EventArgs e)
         {
             var contractorsToDelete = new List<ContractorViewModel>();
-            foreach(var row in contractorGridView.SelectedRows)
+            foreach (var row in contractorGridView.SelectedRows)
             {
                 if (row is DataGridViewRow gridViewRow && gridViewRow.DataBoundItem is ContractorViewModel contractorRow)
                 {
@@ -114,7 +114,7 @@ namespace Contractors.Forms
             contractorGridView.Columns["DisplayedAddress"].HeaderText = "Address";
         }
 
-        private async Task SetDataGrid()
+        public async Task SetDataGrid()
         {
             await FillGridWithData();
             SetPaginationInfo();
@@ -125,6 +125,20 @@ namespace Contractors.Forms
             _currentPage = 1;
             await FillGridWithData();
             SetPaginationInfo();
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            EditContractorForm form = new EditContractorForm(this, _contractorService, null);
+            form.ShowDialog();
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            var contractor = contractorGridView.SelectedRows[0].DataBoundItem as ContractorViewModel;
+
+            EditContractorForm form = new EditContractorForm(this, _contractorService, contractor);
+            form.ShowDialog();
         }
     }
 }

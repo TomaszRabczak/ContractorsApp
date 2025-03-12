@@ -1,9 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Contractors.Contracts.Models.ViewModel;
 
 namespace Contractors.Contracts.Models
 {
-    public class ContractorAddress : AuditModel
+    public class ContractorAddress
     {
+        public int Id { get; set; }
         [MaxLength(50)]
         public string Country { get; set; } = default!;
         [MaxLength(50)]
@@ -14,5 +16,19 @@ namespace Contractors.Contracts.Models
         public string StreetAndNumber { get; set; } = default!;
         public Contractor Contractor { get; set; } = default!; 
         public int ContractorId { get; set; }
+
+        public ContractorAddress(int id, string country, string city, string postalCode, string streetAndNumber)
+        {
+            Id = id;
+            Country = country;
+            City = city;
+            PostalCode = postalCode;
+            StreetAndNumber = streetAndNumber;
+        }
+
+        public static ContractorAddress Create(int id, string country, string city, string postalCode, string streetAndNumber)
+        {
+            return new ContractorAddress(id, country, city, postalCode, streetAndNumber);
+        }
     }
 }

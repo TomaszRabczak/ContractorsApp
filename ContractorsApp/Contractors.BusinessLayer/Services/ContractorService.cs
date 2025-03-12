@@ -25,6 +25,28 @@ namespace Contractors.BusinessLayer.Services
                 request.Pagination);
         }
 
+        //public async Task CreateContractorAsync(ContractorViewModel contractor)
+        //{
+        //    var contractorAddresses = contractor.Addresses.Select(x => ContractorAddress.Create(x.Id, x.Country,
+        //        x.City, x.PostalCode, x.StreetAndNumber));
+
+        //    var mappedContractor = Contractor.Create(contractor.Id, contractor.Name, contractor.Nip, 
+        //        contractor.Regon, contractorAddresses.ToList());
+
+        //    await _contractorRepository.CreateContractorAsync(mappedContractor);
+        //}
+
+        public async Task SaveContractorAsync(ContractorViewModel contractor)
+        {
+            var contractorAddresses = contractor.Addresses.Select(x => ContractorAddress.Create(x.Id, x.Country,
+                x.City, x.PostalCode, x.StreetAndNumber));
+
+            var mappedContractor = Contractor.Create(contractor.Id, contractor.Name, contractor.Nip,
+                contractor.Regon, contractorAddresses.ToList());
+
+            await _contractorRepository.SaveContractorAsync(mappedContractor);
+        }
+
         public async Task DeleteContractors(IEnumerable<ContractorViewModel> contractors)
         {
             var mappedContractors = contractors.Select(x => new Contractor { Id = x.Id });

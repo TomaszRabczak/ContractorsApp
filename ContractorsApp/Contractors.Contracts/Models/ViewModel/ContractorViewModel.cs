@@ -7,19 +7,19 @@
         public string Nip { get; set; }
         public string Regon {  get; set; }
         public string DisplayedAddress { get; set; }
-        public IEnumerable<ContractorAddressViewModel> Addresses { get; set; }
+        public ICollection<ContractorAddressViewModel> Addresses { get; set; }
 
-        public ContractorViewModel(int id, string name, string nip, string regon, IEnumerable<ContractorAddress> addresses)
+        public ContractorViewModel(int id, string name, string nip, string regon, ICollection<ContractorAddress> addresses)
         {
             Id = id;
             Name = name;
             Nip = nip;
             Regon = regon;
-            Addresses = addresses.Select(x => ContractorAddressViewModel.Create(x.Id, x.Country, x.City, x.PostalCode, x.StreetAndNumber));
+            Addresses = addresses.Select(x => ContractorAddressViewModel.Create(x.Id, x.Country, x.City, x.PostalCode, x.StreetAndNumber)).ToList();
             DisplayedAddress = FormatAddress(addresses.FirstOrDefault());
         }
 
-        public static ContractorViewModel Create(int id, string name, string nip, string regon, IEnumerable<ContractorAddress> addresses)
+        public static ContractorViewModel Create(int id, string name, string nip, string regon, ICollection<ContractorAddress> addresses)
         {
             return new ContractorViewModel(id, name, nip, regon, addresses);
         }
