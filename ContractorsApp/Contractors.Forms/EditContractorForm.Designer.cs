@@ -133,6 +133,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.ControlLight;
             ClientSize = new Size(800, 297);
             Controls.Add(textBoxCountry);
             Controls.Add(btnSave);

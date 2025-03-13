@@ -38,6 +38,20 @@ namespace Contractors.Forms
 
         private async void btnDelete_Click(object sender, EventArgs e)
         {
+            var contractorsToDelete = PrepareContractorsToDelete();
+            var result = await _contractorService.DeleteContractors(contractorsToDelete);
+            if(!result)
+            {
+                MessageBox.Show("Error occured");
+                return;
+            }
+
+            _currentPage = 1;
+            await SetDataGrid();
+        }
+
+        private List<ContractorViewModel> PrepareContractorsToDelete()
+        {
             var contractorsToDelete = new List<ContractorViewModel>();
             foreach (var row in contractorGridView.SelectedRows)
             {
@@ -46,10 +60,8 @@ namespace Contractors.Forms
                     contractorsToDelete.Add(contractorRow);
                 }
             }
-            await _contractorService.DeleteContractors(contractorsToDelete);
 
-            _currentPage = 1;
-            await SetDataGrid();
+            return contractorsToDelete;
         }
 
         private async void comboBoxPageSize_SelectionChangeCommitted(object sender, EventArgs e)

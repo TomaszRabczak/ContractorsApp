@@ -25,21 +25,41 @@ namespace Contractors.BusinessLayer.Services
                 request.Pagination);
         }
 
-        public async Task SaveContractorAsync(ContractorViewModel contractor)
+        public async Task<bool> SaveContractorAsync(ContractorViewModel contractor)
         {
-            var contractorAddresses = contractor.Addresses.Select(x => ContractorAddress.Create(x.Id, x.Country,
-                x.City, x.PostalCode, x.StreetAndNumber));
+            try
+            {
+                var contractorAddresses = contractor.Addresses.Select(x => ContractorAddress.Create(x.Id, x.Country,
+                    x.City, x.PostalCode, x.StreetAndNumber));
 
-            var mappedContractor = Contractor.Create(contractor.Id, contractor.Name, contractor.Nip,
-                contractor.Regon, contractorAddresses.ToList());
+                var mappedContractor = Contractor.Create(contractor.Id, contractor.Name, contractor.Nip,
+                    contractor.Regon, contractorAddresses.ToList());
 
-            await _contractorRepository.SaveContractorAsync(mappedContractor);
+                await _contractorRepository.SaveContractorAsync(mappedContractor);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // TODO log
+                return false;
+            }
         }
 
-        public async Task DeleteContractors(IEnumerable<ContractorViewModel> contractors)
+        public async Task<bool> DeleteContractors(IEnumerable<ContractorViewModel> contractors)
         {
-            var mappedContractors = contractors.Select(x => new Contractor { Id = x.Id });
-            await _contractorRepository.DeleteContractors(mappedContractors);
+            try
+            {
+                var mappedContractors = contractors.Select(x => new Contractor { Id = x.Id });
+                await _contractorRepository.DeleteContractors(mappedContractors);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // TODO log
+                return false;
+            }
         }
     }
 }

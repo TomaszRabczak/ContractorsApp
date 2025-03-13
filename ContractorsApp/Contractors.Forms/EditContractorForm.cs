@@ -43,7 +43,13 @@ namespace Contractors.Forms
             }
 
             var contractor = PrepareContractorToSave();
-            await _contractorService.SaveContractorAsync(contractor);
+            var result = await _contractorService.SaveContractorAsync(contractor);
+
+            if(!result)
+            {
+                MessageBox.Show("Error occured.");
+                return;
+            }
 
             Close();
             await _gridContractorForm.SetDataGrid();
